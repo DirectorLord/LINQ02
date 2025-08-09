@@ -149,6 +149,49 @@ internal class Program
 
         #region Set operators
 
+        #region Question1
+        //Find the unique Category names from Product List
+        var uniqueCategories = ListGenerators.ProductList.Select(p => p.Category).Distinct();
+        uniqueCategories.Print();
+        #endregion
+
+        #region Question2
+        //Produce a Sequence containing the unique first letter from both product and customer names.
+        var productFirstLetters = ListGenerators.ProductList.Select(p => p.ProductName[0]);
+        var customerFirstLetters = ListGenerators.CustomerList.Select(c => c.CustomerName[0]);
+        var uniqueFirstLetters = productFirstLetters.Concat(customerFirstLetters).Distinct();
+        productFirstLetters.Print();
+        customerFirstLetters.Print();
+        uniqueFirstLetters.Print();
+        #endregion
+
+        #region Question3
+        //Create one sequence that contains the common first letter from both product and customer names.
+        var productLetters = ListGenerators.ProductList.Select(p => p.ProductName[0]);
+        var customerLetters = ListGenerators.CustomerList.Select(c => c.CustomerName[0]);
+        var commonFirstLetters = productLetters.Intersect(customerFirstLetters);
+
+        commonFirstLetters.Print();
+        #endregion
+
+        #region Question4
+        //Create one sequence that contains the first letters of product names that are not also first letters of customer names.
+        var productFirstLetter = ListGenerators.ProductList.Select(p => p.ProductName[0]);
+        var customerFirstLetter = ListGenerators.CustomerList.Select(c => c.CustomerName[0]);
+        var uniqueProductFirstLetters = productFirstLetter.Except(customerFirstLetters);
+
+        uniqueProductFirstLetters.Print();
+        #endregion
+
+        #region Question5
+        //Create one sequence that contains the last Three Characters in each name of all customers and products, including any duplicates
+
+        var productLastThree = ListGenerators.ProductList.Select(p => p.ProductName.Length >= 3 ? p.ProductName.Substring(p.ProductName.Length - 3) : p.ProductName);
+        var customerLastThree = ListGenerators.CustomerList.Select(c => c.CustomerName.Length >= 3 ? c.CustomerName.Substring(c.CustomerName.Length - 3) : c.CustomerName);
+        var allLastThree = productLastThree.Concat(customerLastThree);
+
+        allLastThree.Print();
+        #endregion
         #endregion
     }
 }
